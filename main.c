@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-#include <locale.h>
-#include "Pilha.h"
-#include "Hanoi.h"
+#include "pilha.h"
+#include "hanoi.h"
 
 void menu();
 void menuMovimento();
 
-int main(void) {
-	setlocale(LC_ALL, "Portuguese");
-	
+int main(void) {	
 	setup();
 	menu();
 	endGame();
@@ -18,29 +15,31 @@ int main(void) {
 	return 0;
 }
 
+/* -------------------- Menu principal -------------------- */
 void menu(){
 	const unsigned int N;
 	printf("\n\t Torre de Hanoi com Pilha\n\n");
-	printf("Definir quantidade de pinos: ");
+	printf("Definir quantidade de discos: ");
 	scanf("%u", &N);
+	//Possível validação ...
 	initPins(N);
 
 	while(1){
 		char op;
 		system("cls");
-		printf("\n\t Torre de Hanoi com Pilha\n\n");
+		printf("\n\t Torre de Hanoi com Pilha\n\n"   );
 
-		printf("1 - Redefinir quantidade de pinos\n");
-		printf("2 - Realizar movimento\n");
-		printf("3 - Resetar pinos\n");
-		printf("4 - Sair do programa\n");
+		printf("1 - Redefinir quantidade de discos\n");
+		printf("2 - Realizar movimento\n"            );
+		printf("3 - Resetar pinos\n"                 );
+		printf("4 - Sair do programa\n"              );
 
 		op = getch();
 
 		switch(op){
 			case '1':
 				system("cls");
-				printf("Refinir quantidade de pinos: ");
+				printf("Redefinir quantidade de pinos: ");
 				scanf("%u", &N);
 				initPins(N);
 				break;
@@ -57,11 +56,12 @@ void menu(){
 				printf("\nSaindo...\n");
 				return;
 			default:
-				printf("\nOpção inválida!");
+				printf("\nOpcao invalida!");
 		}
 	}
 }
 
+/* -------------------- Menu de movimentação dos discos. -------------------- */
 void menuMovimento(){
 	char op;
 	
@@ -77,28 +77,29 @@ void menuMovimento(){
 		printf("5 - Pino C para Pino A\n"  );
 		printf("6 - Pino C para Pino B\n\n");
 		printf("7 - Movimentos validos\n"  );
-		printf("8 - Voltar\n"              );
+		printf("8 - Mostrar solucao\n"     );
+		printf("9 - Voltar\n"              );
 
 		setbuf(stdin, NULL);
 		op = getch();
 		switch(op){
 			case '1':
-				play(AB);
+				play(AB, false);
 				break;
 			case '2':
-				play(AC);
+				play(AC, false);
 				break;
 			case '3':
-				play(BA);
+				play(BA, false);
 				break;
 			case '4':
-				play(BC);
+				play(BC, false);
 				break;
 			case '5':
-				play(CA);
+				play(CA, false);
 				break;
 			case '6':
-				play(CB);
+				play(CB, false);
 				break;
 			case '7':
 				printf("\n");
@@ -113,9 +114,12 @@ void menuMovimento(){
 				getch();
 				break;
 			case '8':
+				listarMovimentosSolucao();
+				break;
+			case '9':
 				return;
 			default:
-				printf("Opção inválida!\n");
+				printf("Opcao invalida!\n");
 		}
 	}
 }

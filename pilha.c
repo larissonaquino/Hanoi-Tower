@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Pilha.h"
+#include "pilha.h"
 
 #define TAM_MAX 100
 
@@ -63,7 +63,7 @@ void imprimirPinos(Pilha * pinoA, Pilha * pinoB, Pilha * pinoC){
 	int maior = pinoA->tp >= pinoB->tp ? pinoA->tp : pinoB->tp;
 
 	maior = maior >= pinoC->tp ? maior : pinoC->tp;
-	printf("A\tB\tC\n");
+	printf("\nA\tB\tC\n");
 	for(i = maior; i >= 0; i--){
 		if(i < pinoA->tp)
 			printf("%d", pinoA->itens[i]);
